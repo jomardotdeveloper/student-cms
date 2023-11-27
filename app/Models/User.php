@@ -18,8 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
     ];
 
@@ -42,4 +41,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function contact()
+    {
+        return $this->hasOne(Contact::class);
+    }
+
+    public function suggestions()
+    {
+        return $this->hasMany(Suggestion::class);
+    }
+
+    public function getKeywordsSuggestionsAttribute()
+    {
+        $keywords = [];
+        $suggestions = $this->suggestions;
+
+        foreach ($suggestions as $suggestion) {
+            foreach ($suggestion->keywords_related as $keyword) {
+                $keywords[] = $keyword;
+            }
+        }
+
+        return $keywords;
+    }
 }
