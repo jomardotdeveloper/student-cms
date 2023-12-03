@@ -5,6 +5,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CommitteeController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\GrievanceController;
+use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SuggestionCategoryController;
@@ -39,6 +40,7 @@ Route::prefix("/backend")->middleware('auth')->group(function () {
     Route::resource('emails', EmailController::class);
     Route::resource('announcement_categories', AnnouncementCategoryController::class);
     Route::resource('announcements', AnnouncementController::class);
+    Route::resource('policies', PolicyController::class);
 
     Route::get('/profile', 'App\Http\Controllers\ProfileController@profile')->name('profile');
     Route::get('/profile/edit', 'App\Http\Controllers\ProfileController@editProfile')->name('profile.edit');
@@ -55,7 +57,7 @@ Route::prefix("/backend")->middleware('auth')->group(function () {
     Route::get('/suggestions/{suggestion}/upvote', 'App\Http\Controllers\SuggestionController@upvote')->name('suggestions.upvote');
     Route::get('/suggestions/{suggestion}/downvote', 'App\Http\Controllers\SuggestionController@downvote')->name('suggestions.downvote');
 
-    Route::get('/stats', 'App\Http\Controllers\StatsController@index')->name('stats.index');
+    Route::get('/stats', 'App\Http\Controllers\StatsController@indwex')->name('stats.index');
 
 
     Route::resource('grievances', GrievanceController::class);

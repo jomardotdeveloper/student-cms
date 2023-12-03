@@ -1,6 +1,11 @@
 @extends('master')
 
 @section('content')
+<div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
+</div>
 <!-- Datatable CSS -->
 @if (!auth()->user()->contact->role->is_committee)
 <div class="row filter-row">
@@ -158,22 +163,11 @@
                 </div>
                 @endif
                 <div class="project-members m-b-15">
-                    <button class="btn btn-primary" onclick="upvote()" {{ !$suggestion->user_allowed_to_up_vote ? "disabled" : "" }}>({{ $suggestion->up_vote_counts }}) Up Vote</a>
-                    <button class="btn btn-warning mx-2"  onclick="downvote()" {{ !$suggestion->user_allowed_to_down_vote ? "disabled" : "" }}>({{ $suggestion->down_vote_counts }})Down Vote</a>
+                    <button class="btn btn-primary" onclick="upvote('{{ $suggestion->id }}')" {{ !$suggestion->user_allowed_to_up_vote ? "disabled" : "" }}>({{ $suggestion->up_vote_counts }}) Up Vote</a>
+                    <button class="btn btn-warning mx-2"  onclick="downvote('{{ $suggestion->id }}')" {{ !$suggestion->user_allowed_to_down_vote ? "disabled" : "" }}>({{ $suggestion->down_vote_counts }})Down Vote</a>
                 </div>
 
-                <script>
 
-                    function upvote() {
-                        var url = "{{ route('suggestions.upvote', ['suggestion' => $suggestion]) }}";
-                        window.location.href = url;
-                    }
-
-                    function downvote () {
-                        var url = "{{ route('suggestions.downvote', ['suggestion' => $suggestion]) }}";
-                        window.location.href = url
-                    }
-                </script>
             </div>
         </div>
     </div>
@@ -187,3 +181,31 @@
 
 
 @endsection
+@push('scripts')
+<script>
+
+    function upvote(id) {
+        var url = "/backend/suggestions/" + id + "/upvote";
+
+
+        // Redirect to the generated URL
+        window.location.href = url;
+
+
+
+
+    }
+
+    function downvote (id) {
+
+        var url = "/backend/suggestions/" + id + "/downvote";
+
+
+        // Redirect to the generated URL
+        window.location.href = url;
+
+
+
+    }
+</script>
+@endpush

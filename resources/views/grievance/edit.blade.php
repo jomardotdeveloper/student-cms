@@ -4,6 +4,9 @@
 <!-- Datatable CSS -->
 
 <div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
     <div class="col-sm-12">
         @if($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -228,7 +231,7 @@
                                 Please provide narrative details of your Concern, Query, Complaint, and/or Grievance. <br>
                                 If your concern has already been resolved after you have answered this form, please contact the Ambassadors for Students' Protection and Case Assistance via contact number, email, or Messenger.
                             </label>
-                            <textarea name="description_of_concern" id="description_of_concern" class="form-control" cols="30" rows="10" required>{{$grievance->description_of_concern}}</textarea>
+                            <textarea name="description_of_concern" id="description_of_concern" class="form-control" cols="30" rows="10" required {{ auth()->user()->contact->role->is_committee ? "disabled" : "" }}>{{$grievance->description_of_concern}}</textarea>
                         </div>
                     </div>
 

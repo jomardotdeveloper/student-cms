@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($validated, true)) {
             $request->session()->regenerate();
-            return redirect()->intended("/backend/dashboard");
+            return redirect()->intended("/backend/stats");
         }
 
         return back()->with(["error" => ["Invalid Credentials"]]);

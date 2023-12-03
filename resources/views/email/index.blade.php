@@ -4,8 +4,14 @@
 <!-- Datatable CSS -->
 
 <div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
     <div class="col-sm-12">
         <a href="{{ route('emails.create') }}" class="btn btn-primary mb-2">Send Message</a>
+        <a href="{{ route('emails.index') }}?type=all" class="btn btn-primary mb-2 mx-2">All</a>
+        <a href="{{ route('emails.index') }}?type=received" class="btn btn-primary mb-2 mx-2">Inbox</a>
+        <a href="{{ route('emails.index') }}?type=sent" class="btn btn-primary mb-2 mx-2">Sent</a>
     </div>
 
     <div class="col-sm-12">

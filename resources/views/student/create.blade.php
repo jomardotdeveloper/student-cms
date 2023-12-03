@@ -4,6 +4,9 @@
 <!-- Datatable CSS -->
 
 <div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
     <div class="col-sm-12">
         @if($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -66,8 +69,19 @@
 
                     <div class="col-4">
                         <div class="form-group mb-4">
-                            <label>Course</label>
-                            <input class="form-control" type="text" name="college" placeholder="Course" required>
+                            <label>Course                       </label>
+                            <select name="college" class="form-control" required>
+                                <option value="BS ChE">Bachelor of Science in Chemical Engineering - BS ChE</option>
+                                <option value="BS CE">Bachelor of Science in Civil Engineering - BS CE</option>
+                                <option value="BS CpE">Bachelor of Science in Computer Engineering - BS CpE</option>
+                                <option value="BS CS">Bachelor of Science in Computer Science - BS CS</option>
+                                <option value="BS EE">Bachelor of Science in Electrical Engineering - BS EE</option>
+                                <option value="BS ECE">Bachelor of Science in Electronics Engineering - BS ECE</option>
+                                <option value="BS IT">Bachelor of Science in Information Technology - BS IT</option>
+                                <option value="BS MfE">Bachelor of Science in Manufacturing Engineering - BS MfE</option>
+                                <option value="BS ME">Bachelor of Science in Mechanical Engineering - BS ME</option>
+                            </select>
+
                         </div>
                     </div>
 

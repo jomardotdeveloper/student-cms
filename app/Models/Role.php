@@ -113,4 +113,9 @@ class Role extends Model
     {
         return $this->suggestion_read_only || $this->suggestion_read_write || $this->suggestion_read_delete || $this->suggestion_read_create || $this->suggestion_read_own_only;
     }
+
+    public function getHasSuggestionCategoryAccessAttribute()
+    {
+        return $this->suggestion_category_read_only || $this->suggestion_category_read_write || $this->suggestion_category_read_delete || $this->suggestion_category_read_create;
+    }
 }

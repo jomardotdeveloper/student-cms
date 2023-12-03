@@ -4,6 +4,9 @@
 <!-- Datatable CSS -->
 
 <div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
     <div class="col-sm-12">
         <div class="card mb-0">
             <div class="card-header">
@@ -241,6 +244,31 @@
                         <div class="checkbox">
                             <label class="col-form-label">
                                 <input type="checkbox" name="suggestion_read_create"> Suggestion Read & Create
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-4 mt-2">
+                        <label>Suggestion category</label>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_category_read_only"> Suggestion Category Readonly
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_category_read_write"> Suggestion Category Read & Write
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_category_read_delete"> Suggestion Category Read & Delete
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_category_read_create"> Suggestion Category Read & Create
                             </label>
                         </div>
                     </div>

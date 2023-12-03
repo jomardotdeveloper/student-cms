@@ -4,6 +4,9 @@
 <!-- Datatable CSS -->
 
 <div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
     <div class="col-12">
         <a href="{{ route('grievances.print') }}" class="btn btn-primary">
             Print Summary Report
@@ -262,6 +265,18 @@
                         <label for="">NLP Comment</label> <br>
                         <p>{{ $grievance->final_say }}</p>
                     </div>
+
+                    @if (auth()->user()->contact->role->complaints_read_delete)
+                    <div class="col-12">
+                        <form action="{{ route('grievances.destroy', ['grievance' => $grievance]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <input type="submit" value="Delete" class="btn btn-danger"/>
+                        </form>
+                    </div>
+
+                    @endif
                 </form>
             </div>
         </div>

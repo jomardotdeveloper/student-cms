@@ -59,10 +59,32 @@ class User extends Authenticatable
 
         foreach ($suggestions as $suggestion) {
             foreach ($suggestion->keywords_related as $keyword) {
-                $keywords[] = $keyword;
+                if (!in_array($keyword, $keywords)) {
+                    $keywords[] = $keyword;
+                }
+                // $keywords[] = $keyword;
             }
         }
 
         return $keywords;
+    }
+
+    public function emails()
+    {
+        return $this->hasMany(Email::class , 'to_user_id');
+    }
+
+    public function getUnreadMessagesAttribute()
+    {
+        $unread_messages = 0;
+        $messages = $this->emails;
+
+        foreach ($messages as $message) {
+            if ($message->is_read == false && $message->to_user_id == $this->id) {
+                $unread_messages++;
+            }
+        }
+
+        return $unread_messages;
     }
 }

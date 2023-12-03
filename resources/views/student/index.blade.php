@@ -4,6 +4,9 @@
 <!-- Datatable CSS -->
 
 <div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
     @if (auth()->user()->contact->role->students_read_create)
     <div class="col-sm-12">
         <a href="{{ route('students.create') }}" class="btn btn-primary mb-2">Add Student</a>
@@ -54,7 +57,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if (auth()->user()->contact->role->students_read_edit)
+                                    @if (auth()->user()->contact->role->students_read_write)
                                     <a href="{{ route('students.edit', $contact->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                     @endif
                                     <a href="{{ route('students.show', $contact->id) }}" class="btn btn-primary btn-sm">Show</a>

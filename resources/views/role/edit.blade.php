@@ -4,6 +4,9 @@
 <!-- Datatable CSS -->
 
 <div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
     <div class="col-sm-12">
         <div class="card mb-0">
             <div class="card-header">
@@ -217,6 +220,59 @@
                         </div>
                     </div>
 
+                    <div class="col-4 mt-2">
+                        <label>Suggestion</label>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_read_only" {{ $role->suggestion_read_only ? 'checked' : '' }}> Suggestion Readonly
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_read_own_only" {{ $role->suggestion_read_own_only ? 'checked' : '' }}> Suggestion Readonly Own
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_read_write" {{ $role->suggestion_read_write ? 'checked' : '' }}> Suggestion Read & Write
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_read_delete" {{ $role->suggestion_read_delete ? 'checked' : '' }}> Suggestion Read & Delete
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_read_create" {{ $role->suggestion_read_create ? 'checked' : '' }}> Suggestion Read & Create
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-4 mt-2">
+                        <label>Suggestion category</label>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_category_read_only" {{ $role->suggestion_category_read_only ? 'checked' : '' }}> Suggestion Category Readonly
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_category_read_write" {{ $role->suggestion_category_read_write ? 'checked' : '' }}> Suggestion Category Read & Write
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_category_read_delete" {{ $role->suggestion_category_read_delete ? 'checked' : '' }}> Suggestion Category Read & Delete
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="suggestion_category_read_create" {{ $role->suggestion_category_read_create ? 'checked' : '' }}> Suggestion Category Read & Create
+                            </label>
+                        </div>
+                    </div>
 
 
 

@@ -392,71 +392,120 @@
 							</li>
                             {{-- ADMIN MENUS --}}
                             @if (auth()->user()->contact->role->has_dashboard_access)
-                            <li>
+                            <li class="{{
+
+                                Route::current()->getName() == 'dashboard' ? 'active' : ''
+                            }}">
 								<a href="{{ route('dashboard') }}"><i class="la la-dashboard"></i> <span>Dashboard</span></a>
 							</li>
 
                             @endif
                             @if (auth()->user()->contact->role->access_to_message)
-                            <li>
-								<a href="{{ route('emails.index') }}"><i class="lab la-rocketchat"></i> <span>Messages</span></a>
+                            <li class="{{
+                                Route::current()->getName() == 'emails.index' ? 'active' : ''
+                            }}">
+								<a href="{{ route('emails.index') }}"><i class="lab la-rocketchat"></i> <span>Messages <span class="badge bg-inverse-success">{{
+                                    auth()->user()->unread_messages
+                                }} </span></span></a>
 							</li>
                             @endif
 
                             @if (auth()->user()->contact->role->has_roles_access)
-                            <li>
+                            <li class="{{
+
+                                Route::current()->getName() == 'roles.index' ? 'active' : ''
+                            }}">
 								<a href="{{ route('roles.index') }}"><i class="la la-user"></i> <span>Roles</span></a>
 							</li>
                             @endif
 
                             @if (auth()->user()->contact->role->has_students_access)
-                            <li>
+                            <li class="{{
+                                Route::current()->getName() == 'students.index' ? 'active' : ''
+
+                            }}">
 								<a href="{{ route('students.index') }}"><i class="la la-users"></i> <span>Students</span></a>
 							</li>
                             @endif
 
                             @if (auth()->user()->contact->role->has_committees_access)
-                            <li>
+                            <li class="{{
+                                Route::current()->getName() == 'committees.index' ? 'active' : ''
+
+
+                            }}">
 								<a href="{{ route('committees.index') }}"><i class="la la-briefcase"></i> <span>Committees</span></a>
 							</li>
                             @endif
 
                             @if (auth()->user()->contact->role->has_registration_requests_access)
-                            <li>
+                            <li class="{{
+                                Route::current()->getName() == 'contacts.index' ? 'active' : ''
+
+                            }}">
 								<a href="{{ route('contacts.index') }}"><i class="la la-file-text"></i> <span>Registration Requests</span></a>
 							</li>
                             @endif
 
                             @if (auth()->user()->contact->role->has_pinboard_access)
-                            <li>
+                            <li class="{{
+                                Route::current()->getName() == 'announcement_categories.index' ? 'active' : ''
+
+                            }}">
 								<a href="{{ route('announcement_categories.index') }}"><i class="la la-bell"></i> <span>Pinboard Categories</span></a>
 							</li>
-                            <li>
+                            <li class="{{
+                                Route::current()->getName() == 'announcements.index' ? 'active' : ''
+
+                            }}" >
 								<a href="{{ route('announcements.index') }}"><i class="la la-bell"></i> <span>Pinboard</span></a>
 							</li>
                             @endif
 
 
                             @if (auth()->user()->contact->role->has_complaints_access)
-                            <li>
+                            <li class="{{
+                                Route::current()->getName() == 'grievances.index' ? 'active' : ''
+
+                            }}">
 								<a href="{{ route('grievances.index')}}"><i class="la la-object-group"></i> <span>Grievances</span></a>
 							</li>
                             @endif
 
                             @if (auth()->user()->contact->role->has_stats_access)
-                            <li>
+                            <li class="{{
+                                Route::current()->getName() == 'stats.index' ? 'active' : ''
+
+                            }}">
 								<a href="{{ route('stats.index') }}"><i class="la la-puzzle-piece"></i> <span>Stats</span></a>
 							</li>
                             @endif
 
-                            @if (auth()->user()->contact->role->has_suggestion_access)
-                            <li>
+                            @if (auth()->user()->contact->role->has_suggestion_category_access)
+                            <li class="{{
+                                Route::current()->getName() == 'suggestion_categories.index' ? 'active' : ''
+
+                            }}">
 								<a href="{{ route('suggestion_categories.index') }}"><i class="la la-file-pdf-o"></i> <span>Suggestion Category</span></a>
 							</li>
-                            <li>
+                            @endif
+
+                            @if (auth()->user()->contact->role->has_suggestion_access)
+
+                            <li class="{{
+                                Route::current()->getName() == 'suggestions.index' ? 'active' : ''
+
+                            }}">
 								<a href="{{ route('suggestions.index') }}"><i class="la la-file-pdf-o"></i> <span>Suggestions</span></a>
 							</li>
                             @endif
+
+                            <li class="{{
+                                Route::current()->getName() == 'policies.index' ? 'active' : ''
+
+                            }}">
+								<a href="{{ route('policies.index') }}"><i class="la la-file"></i> <span>Policies</span></a>
+							</li>
 
 						</ul>
 
@@ -532,6 +581,8 @@
             });
 
         </script>
+
+        @stack('scripts')
 
     </body>
 </html>

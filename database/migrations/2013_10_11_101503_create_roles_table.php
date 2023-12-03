@@ -73,6 +73,11 @@ return new class extends Migration
             $table->boolean('suggestion_read_delete')->default(false);
             $table->boolean('suggestion_read_create')->default(false);
 
+            $table->boolean('suggestion_category_read_only')->default(false);
+            $table->boolean('suggestion_category_read_write')->default(false);
+            $table->boolean('suggestion_category_read_delete')->default(false);
+            $table->boolean('suggestion_category_read_create')->default(false);
+
             $table->timestamps();
         });
     }

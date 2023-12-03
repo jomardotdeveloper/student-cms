@@ -16,8 +16,13 @@ class DashboardController extends Controller
 
         $registration_requests = Contact::where('user_id', null)->where('role_id', $student_role->id)->get();
         $students = Contact::where('user_id', "!=", null)->where('role_id', $student_role->id)->get();
-        $committees = Contact::where('user_id', "!=", null)->where('role_id', $committee_role->id)->get();
+        // $committees = Contact::where('user_id', "!=", null)->where('role_id', $committee_role->id)->get();
         $grievances = Grievance::all();
+
+
+        $committee_roles = Role::where('is_committee', true)->get();
+        $committees = Contact::whereIn('role_id', $committee_roles->pluck('id'))->get();
+
 
         return view("dashboard" , compact('registration_requests', 'students', 'committees' , 'grievances'));
     }

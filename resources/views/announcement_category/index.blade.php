@@ -4,6 +4,9 @@
 <!-- Datatable CSS -->
 
 <div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
     @if (auth()->user()->contact->role->pinboard_read_create)
     <div class="col-sm-12">
         <a href="{{ route('announcement_categories.create') }}" class="btn btn-primary mb-2">Add Category</a>

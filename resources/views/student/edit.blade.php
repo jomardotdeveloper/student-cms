@@ -4,6 +4,9 @@
 <!-- Datatable CSS -->
 
 <div class="row">
+    <div class="col-sm-12 mb-1">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    </div>
     <div class="col-sm-12">
         @if($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -66,8 +69,19 @@
 
                     <div class="col-4">
                         <div class="form-group mb-4">
-                            <label>Course</label>
-                            <input class="form-control" type="text" name="college" placeholder="Course" required value="{{ $student->college }}">
+                            <label>Course                       </label>
+                            <select name="college" class="form-control" required>
+                                <option value="BS ChE" {{ $student->course == "BS ChE" ? "selected" : "" }}>Bachelor of Science in Chemical Engineering - BS ChE</option>
+                                <option value="BS CE" {{ $student->course == "BS CE" ? "selected" : "" }}>Bachelor of Science in Civil Engineering - BS CE</option>
+                                <option value="BS CpE" {{ $student->course == "BS CpE" ? "selected" : "" }}>Bachelor of Science in Computer Engineering - BS CpE</option>
+                                <option value="BS CS" {{ $student->course == "BS CS" ? "selected" : "" }}>Bachelor of Science in Computer Science - BS CS</option>
+                                <option value="BS EE" {{ $student->course == "BS EE" ? "selected" : "" }}>Bachelor of Science in Electrical Engineering - BS EE</option>
+                                <option value="BS ECE" {{ $student->course == "BS ECE" ? "selected" : "" }}>Bachelor of Science in Electronics Engineering - BS ECE</option>
+                                <option value="BS IT" {{ $student->course == "BS IT" ? "selected" : "" }}>Bachelor of Science in Information Technology - BS IT</option>
+                                <option value="BS MfE" {{ $student->course == "BS MfE" ? "selected" : "" }}>Bachelor of Science in Manufacturing Engineering - BS MfE</option>
+                                <option value="BS ME" {{ $student->course == "BS ME" ? "selected" : "" }}>Bachelor of Science in Mechanical Engineering - BS ME</option>
+                            </select>
+
                         </div>
                     </div>
 

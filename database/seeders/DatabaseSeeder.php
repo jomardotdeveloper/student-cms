@@ -69,6 +69,10 @@ class DatabaseSeeder extends Seeder
             'suggestion_read_write' => true,
             'suggestion_read_delete' => true,
             'suggestion_read_create' => true,
+            'suggestion_category_read_only' => true,
+            'suggestion_category_read_write' => true,
+            'suggestion_category_read_delete' => true,
+            'suggestion_category_read_create' => true,
         ]);
 
         $student = Role::create([
@@ -116,6 +120,10 @@ class DatabaseSeeder extends Seeder
             'suggestion_read_write' => true,
             'suggestion_read_delete' => true,
             'suggestion_read_create' => true,
+            'suggestion_category_read_only' => true,
+            'suggestion_category_read_write' => true,
+            'suggestion_category_read_delete' => true,
+            'suggestion_category_read_create' => true,
         ]);
 
         $committee = Role::create([
@@ -164,6 +172,10 @@ class DatabaseSeeder extends Seeder
             'suggestion_read_write' => true,
             'suggestion_read_delete' => true,
             'suggestion_read_create' => true,
+            'suggestion_category_read_only' => true,
+            'suggestion_category_read_write' => true,
+            'suggestion_category_read_delete' => true,
+            'suggestion_category_read_create' => true,
         ]);
 
 

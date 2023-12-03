@@ -7,18 +7,18 @@
     <div class="col-sm-12 mb-1">
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
     </div>
-    @if (auth()->user()->contact->role->suggestion_category_read_create)
+    @if (auth()->user()->contact->role->is_committee || auth()->user()->id == 1)
     <div class="col-sm-12">
-        <a href="{{ route('suggestion_categories.create') }}" class="btn btn-primary mb-2">Add Category</a>
+        <a href="{{ route('policies.create') }}" class="btn btn-primary mb-2">Add Policy</a>
     </div>
     @endif
 
     <div class="col-sm-12">
         <div class="card mb-0">
             <div class="card-header">
-                <h4 class="card-title mb-0">Suggestion Categories</h4>
+                <h4 class="card-title mb-0">Policies</h4>
                 <p class="card-text">
-                    Suggestion Category <code>records</code>
+                    Policy <code>records</code>
                 </p>
             </div>
             <div class="card-body">
@@ -27,20 +27,18 @@
                     <table class="datatable table table-stripped mb-0">
                         <thead>
                             <tr>
-                                <th>Category</th>
-                                <th>Tags</th>
+                                <th>Parent</th>
+                                <th>Policy</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($suggestion_categories as $categ)
+                            @foreach ($policies as $policy)
                             <tr>
-                                <td>{{ $categ->name }}</td>
-                                <td>{{ implode(",", $categ->tag_names) }}</td>
+                                <td>{{ $policy->parent_id ? $policy->parent->policy : "N/A"}}</td>
+                                <td>{{ $policy->policy }}</td>
                                 <td>
-                                    @if (auth()->user()->contact->role->suggestion_category_read_write)
-                                    <a href="{{ route('suggestion_categories.edit', $categ->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    @endif
+                                    <a href="{{ route('policies.edit', $policy->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                 </td>
                             </tr>
                             @endforeach
