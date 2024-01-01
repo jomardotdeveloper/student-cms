@@ -7,11 +7,20 @@
     <div class="col-sm-12 mb-1">
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
     </div>
-    <div class="col-12">
-        <a href="{{ route('grievances.print') }}" class="btn btn-primary">
+    <div class="col-12 mb-1">
+        <a href="{{ route('grievances.print', $grievance) }}" class="btn btn-primary">
             Print Summary Report
         </a>
     </div>
+    <div class="col-12 mb-1">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verify_npl">
+            Verify NPL
+        </button>
+    </div>
+
+    @include('grievance.verify-npl-modal' , ['grievance' => $grievance])
+
+
     @if ( auth()->user()->contact->role->complaints_read_write && auth()->user()->contact->role->is_committee)
         @if ($grievance->report)
         <div class="col-12">
@@ -19,6 +28,8 @@
                 Edit Report
             </button>
         </div>
+
+
         <div class="modal custom-modal fade" id="delete_employee_2" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -99,7 +110,24 @@
                             <a href="{{ route('students.show', ['student' => $grievance->user->contact]) }}" style="font-size:20px;">{{ $grievance->user->contact->full_name }}</a>
                         </div>
                     </div>
+
                     <div class="col-4">
+                        <div class="form-group mb-4">
+                            <label style="font-weight: bold;">NPL VERIFICATION OUTPUT  </label> <br>
+                            <p>
+                                @if ($grievance->is_tp)
+                                    True Positive
+                                @elseif ($grievance->is_fp)
+                                    False Positive
+                                @elseif ($grievance->is_fn)
+                                    False Negative
+                                @else
+                                    N/A
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+                    {{-- <div class="col-4">
                         <div class="form-group mb-4">
                             <label>Are you a student from PLM?                            </label>
                             <select name="is_student_plm" id="is_student_plm" class="form-control" disabled>
@@ -196,7 +224,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="col-4">
                         <div class="form-group mb-4">
@@ -253,17 +281,19 @@
                         </div>
                     </div>
 
-                    <div class="col-12 mb-2">
+                    {{-- <div class="col-12 mb-2">
                         <label for="">Files</label> <br>
                         @foreach ($grievance->grievanceFiles as  $file)
 
                         <a href="{{ $file->file }}" class="mt-2" target="_blank">{{ $file->file }}</a>
                         @endforeach
-                    </div>
+                    </div> --}}
 
                     <div class="col-12 mb-2">
                         <label for="">NLP Comment</label> <br>
-                        <p>{{ $grievance->final_say }}</p>
+                        {{-- HTML RENDERED --}}
+                        {!!  $grievance->final_say !!}
+                        {{-- <p>{{ $grievance->final_say }}</p> --}}
                     </div>
 
                     @if (auth()->user()->contact->role->complaints_read_delete)
@@ -282,6 +312,7 @@
         </div>
     </div>
     @if ($grievance->status == "Resolved")
+    @include('grievance.rate-modal')
     <div class="col-sm-12 mt-2">
         <div class="card mb-0">
             <div class="card-header">
@@ -295,18 +326,6 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="is_rate_form" value="1"/>
-                    <div class="col-4">
-                        <div class="form-group mb-4">
-                            <label>Rate                      </label>
-                            <select name="rate" class="form-control" required {{ $grievance->rate ? "disabled" : "" }}>
-                                <option value="1" {{ $grievance->rate == "1" ? "selected" : "" }}>1</option>
-                                <option value="2" {{ $grievance->rate == "2" ? "selected" : "" }}>2</option>
-                                <option value="3" {{ $grievance->rate == "3" ? "selected" : "" }}>3</option>
-                                <option value="4" {{ $grievance->rate == "4" ? "selected" : "" }}>4</option>
-                                <option value="5" {{ $grievance->rate == "5" ? "selected" : "" }}>5</option>
-                            </select>
-                        </div>
-                    </div>
 
                     <div class="col-12 mb-2">
                         <div class="form-group">
@@ -332,12 +351,14 @@
 </div>
 
 <div class="row mt-2">
+    @if ($grievance->status != "Resolved")
     @if (auth()->user()->contact->role->complaints_read_write &&  auth()->user()->contact->role->access_to_message)
     <div class="col-12 mb-2">
-        <a href="{{ route('emails.create') }}?grievance_id={{ $grievance->id }}&&message_type={{ auth()->user()->contact->role->is_committee ? "Student" : "Committee"  }}" class="btn btn-primary">
+        <a href="{{ route('emails.create') }}?grievance_id={{ $grievance->id }}&&message_type={{ auth()->user()->contact->role->is_committee ? "Student" : "Committee"  }}&&grievance_is_special=1" class="btn btn-primary">
             Send Message to {{ auth()->user()->contact->role->is_committee ? "Student" : "Committee"  }}
         </a>
     </div>
+    @endif
     @endif
 
     <div class="col-sm-12">
@@ -386,3 +407,16 @@
 </div>
 
 @endsection
+
+
+@push('scripts')
+@if ($grievance->status == "Resolved" && !$grievance->feedback)
+
+<script>
+    $(document).ready(function() {
+        $('#rate_modal').modal('show');
+    });
+</script>
+@endif
+
+@endpush

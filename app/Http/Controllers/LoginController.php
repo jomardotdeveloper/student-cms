@@ -7,7 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Validation\Rules\Password;
 class LoginController extends Controller
 {
     public function login()
@@ -49,7 +49,16 @@ class LoginController extends Controller
     {
         $validated = $request->validate([
             "student_number" => "required|unique:contacts",
-            "password" => "required|confirmed",
+            'password' => [
+                'required',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()
+            ],
+            'password_confirmation' => 'required|same:password'
         ]);
 
 

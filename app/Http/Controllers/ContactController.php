@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MyTestEmail;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -31,6 +33,14 @@ class ContactController extends Controller
 
     public function reject($id) {
         $contact = Contact::findOrFail($id);
+
+        $email = $contact->email;
+
+        $mensahe = "Your registration has been rejected.";
+
+        Mail::to($email)->send(new MyTestEmail($mensahe));
+
+
         $contact->delete();
 
         return redirect()->route('contacts.index');

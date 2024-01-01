@@ -18,7 +18,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             </button>
         </div>
-
         @endif
     </div>
     <div class="col-sm-12">
@@ -46,27 +45,29 @@
                                 <option value="Committee" {{ $messageType == "Committee" ? "selected" : "" }}>Committee</option>
                             </select>
                         </div>
-                    </div>
-
+                    </div>      @php
+                    $grievance_id = null;
+                    $current_grievance = null;
+                    if(isset($_GET['grievance_id'])) {
+                        $grievance_id = $_GET['grievance_id'];
+                        $current_grievance = \App\Models\Grievance::find($grievance_id);
+                    }
+                @endphp
+                    @if (isset($_GET['grievance_is_special']))
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label>Grievance</label>
                             <select name="grievance_id" id="grievance_id" class="form-control" required>
                                 <option value="">Select Grievance</option>
-                                @php
-                                    $grievance_id = null;
-                                    $current_grievance = null;
-                                    if(isset($_GET['grievance_id'])) {
-                                        $grievance_id = $_GET['grievance_id'];
-                                        $current_grievance = \App\Models\Grievance::find($grievance_id);
-                                    }
-                                @endphp
+
                                 @foreach ($grievances as $grievance)
                                 <option value="{{ $grievance->id }}" {{ $grievance_id == $grievance->id ? "selected" : "" }}>{{ $grievance->formatted_id }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
+                    @endif
+
 
                     @if ($messageType == "Committee")
 

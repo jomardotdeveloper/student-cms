@@ -28,6 +28,9 @@ return new class extends Migration
             $table->string('rate')->nullable();
             $table->string('feedback')->nullable();
             $table->string('status')->nullable();
+            $table->boolean('is_tp')->default(false);
+            $table->boolean('is_fp')->default(false);
+            $table->boolean('is_fn')->default(false);
             $table->timestamps();
         });
     }

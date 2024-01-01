@@ -9,7 +9,9 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SuggestionCategoryController;
+use App\Mail\MyTestEmail;
 use App\Models\Suggestion;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect(route("login"));
+});
+
+Route::get('/testroute', function() {
+    $mensahe = "Funny Coder";
+
+    // The email sending is done using the to method on the Mail facade
+    Mail::to('remdoro.28@gmail.com')->send(new MyTestEmail($mensahe));
 });
 
 Route::get('/login', 'App\Http\Controllers\LoginController@login')->name('login');
@@ -57,11 +66,17 @@ Route::prefix("/backend")->middleware('auth')->group(function () {
     Route::get('/suggestions/{suggestion}/upvote', 'App\Http\Controllers\SuggestionController@upvote')->name('suggestions.upvote');
     Route::get('/suggestions/{suggestion}/downvote', 'App\Http\Controllers\SuggestionController@downvote')->name('suggestions.downvote');
 
-    Route::get('/stats', 'App\Http\Controllers\StatsController@indwex')->name('stats.index');
+    Route::get('/stats', 'App\Http\Controllers\StatsController@index')->name('stats.index');
 
+
+
+    Route::get('/imports/index', 'App\Http\Controllers\ImportController@index')->name('imports.index');
+    Route::post('/imports/chart', 'App\Http\Controllers\ImportController@chart')->name('imports.chart');
+    Route::post('/imports/upload', 'App\Http\Controllers\ImportController@uploadCsv')->name('imports.upload');
+    Route::get('/imports/similar-values/{column}', 'App\Http\Controllers\ImportController@getSimilarValues')->name('imports.similar-values');
 
     Route::resource('grievances', GrievanceController::class);
-    Route::get('/grievances/print', 'App\Http\Controllers\GrievanceController@printReport')->name('grievances.print');
+    Route::get('/grievances/print/{grievance}', 'App\Http\Controllers\GrievanceController@printReport')->name('grievances.print');
     Route::resource('roles', RoleController::class);
     Route::get('/registration-request/approve/{id}', 'App\Http\Controllers\ContactController@approve')->name('registration-request.approve');
     Route::get('/registration-request/reject/{id}', 'App\Http\Controllers\ContactController@reject')->name('registration-request.reject');

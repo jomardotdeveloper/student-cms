@@ -96,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="form-group mb-4">
                             <label>Are you a student from PLM?                            </label>
                             <select name="is_student_plm" id="is_student_plm" class="form-control" required>
@@ -104,10 +104,10 @@
                                 <option value="No">No</option>
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
 
 
-
+{{--
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label>PLM Email</label>
@@ -127,9 +127,9 @@
                             <label>Contact #</label>
                             <input class="form-control" type="text" name="contact_number" placeholder="Contact #" required>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="form-group mb-4">
                             <label>Course                       </label>
                             <select name="course" class="form-control" required>
@@ -145,9 +145,9 @@
                             </select>
 
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="form-group mb-4">
                             <label>Year                      </label>
                             <select name="year" class="form-control">
@@ -193,7 +193,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="col-4">
                         <div class="form-group mb-4">
@@ -257,7 +257,7 @@
                         </div>
                     </div>
 
-                    <div class="col-8 mb-2">
+                    {{-- <div class="col-8 mb-2">
                         <div class="form-group">
                             <label for="">Upload files or evidences to support your concern (optional) <br>
                                 The document file to be submitted may contain supporting images or any documents that are raw or not edited. Provide the link/s of other supporting document/s, video/s, or any materials to be attached in the Document if there are any. FILE NAME: Surname_SubjectofConcern
@@ -266,7 +266,7 @@
                             <input type="file" name="files[]" id="files" class="form-control" multiple>
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
                     <div class="col-12">

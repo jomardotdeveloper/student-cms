@@ -17,15 +17,15 @@ class EmailController extends Controller
      */
     public function index()
     {
-        $emails = Email::where('to_user_id', auth()->user()->id)->orWhere('from_user_id', auth()->user()->id)->get();
+        $emails = Email::where('to_user_id', auth()->user()->id)->orWhere('from_user_id', auth()->user()->id)->where('grievance_id',"=", null)->get();
 
-
+        // dd($emails);
         if(isset($_GET['type'])) {
             $type = $_GET['type'];
             if($type == "sent") {
-                $emails = Email::where('from_user_id', auth()->user()->id)->get();
+                $emails = Email::where('from_user_id', auth()->user()->id)->where('grievance_id', null)->get();
             } else if($type == "received") {
-                $emails = Email::where('to_user_id', auth()->user()->id)->get();
+                $emails = Email::where('to_user_id', auth()->user()->id)->where('grievance_id', null)->get();
             }
         }
         return view('email.index', compact('emails'));

@@ -436,6 +436,16 @@
                             }}">
 								<a href="{{ route('committees.index') }}"><i class="la la-briefcase"></i> <span>Committees</span></a>
 							</li>
+
+                            <li class="{{
+                                Route::current()->getName() == 'imports.index' ? 'active' : ''
+
+
+                            }}">
+								<a href="{{ route('imports.index') }}"><i class="la la-file-csv"></i> <span>Import Data</span></a>
+							</li>
+
+
                             @endif
 
                             @if (auth()->user()->contact->role->has_registration_requests_access)

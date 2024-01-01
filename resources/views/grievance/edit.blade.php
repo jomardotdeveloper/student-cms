@@ -80,7 +80,7 @@
                         We value and protect your personal information in compliance with the Data Privacy Act of 2012 (RA 10173). Personal information includes any information such as Name, Year & Course, Contact Number, Student Number, Email Address, and Concern. All data will be kept secure and confidential by the PLM College of Engineering - Student Council Students' Rights and Welfare and Academe Affairs Committee only. The information will serve as a reference for communication. Any personal information will not be disclosed without your consent. <br> URL: <br> https://docs.google.com/document/d/1-_CJqPbIQKZFz1zHVvRrgVOx-Iuu-AurXz6_gqCEMSA/edit?usp=sharing
                     </p>
 
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="form-group mb-4">
                             <label>Are you a student from PLM?                            </label>
                             <select name="is_student_plm" id="is_student_plm" class="form-control" required>
@@ -177,7 +177,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="col-4">
                         <div class="form-group mb-4">
@@ -235,7 +235,7 @@
                         </div>
                     </div>
 
-                    <div class="col-8 mb-2">
+                    {{-- <div class="col-8 mb-2">
                         <div class="form-group">
                             <label for="">Upload files or evidences to support your concern (optional) <br>
                                 The document file to be submitted may contain supporting images or any documents that are raw or not edited. Provide the link/s of other supporting document/s, video/s, or any materials to be attached in the Document if there are any. FILE NAME: Surname_SubjectofConcern
@@ -244,7 +244,7 @@
                             <input type="file" name="files[]" id="files" class="form-control" multiple>
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
                     <div class="col-12">

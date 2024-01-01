@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MyTestEmail;
 use App\Models\Suggestion;
 use App\Models\Vote;
 use App\Models\SuggestionCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use NlpTools\Tokenizers\WhitespaceTokenizer;
 use NlpTools\Similarity\CosineSimilarity;
 
@@ -262,6 +264,12 @@ class SuggestionController extends Controller
     {
         $suggestion->status = "Rejected";
         $suggestion->save();
+
+        $user = $suggestion->user;
+        $email = $user->contact->email;
+        $mensahe = "Your suggestion has been rejected.";
+
+        Mail::to($email)->send(new MyTestEmail($mensahe));
         return redirect()->route('suggestions.index')->with('success', 'Suggestion rejected successfully');
     }
 

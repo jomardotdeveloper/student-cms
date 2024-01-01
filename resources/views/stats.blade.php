@@ -159,6 +159,37 @@
             </div>
         </div>
     </div>
+    <div class="col-md-6 text-center">
+        @php
+            // $voteCurrentYear = isset($_GET['voteYear']) ? $_GET['voteYear'] : date('Y');
+            $tpGrievanceCount = \App\Models\Grievance::where('is_tp', true)->count();
+            $fpGrievanceCount = \App\Models\Grievance::where('is_fp', false)->count();
+            $fnGrievanceCount = \App\Models\Grievance::where('is_fn', true)->count();
+            $precision = 0;
+            $recall = 0;
+            $f1 = 0;
+
+            if ($tpGrievanceCount == 0 || $fpGrievanceCount == 0 || $fnGrievanceCount == 0) {
+                $precision = 0;
+                $recall = 0;
+                $f1 = 0;
+            } else {
+                $precision = $tpGrievanceCount / ($tpGrievanceCount + $fpGrievanceCount);
+                $recall = $tpGrievanceCount / ($tpGrievanceCount + $fnGrievanceCount);
+                $f1 = 2 * (( $precision * $recall) / ($precision + $recall));
+            }
+
+
+
+
+        @endphp
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Precision, f1, and recall</h3>
+                <canvas id="f1-bar-charts"></canvas>
+            </div>
+        </div>
+    </div>
     @endif
 
 
@@ -170,6 +201,29 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+    const ctxzxczxczx = document.getElementById('f1-bar-charts');
+    const preLabels = ["Precision", "F1 Score", "Recall"];
+   const myDataHaha = ["{{ $precision }}", "{{ $f1 }}", "{{ $recall }}"];
+  new Chart(ctxzxczxczx, {
+    type: 'pie',
+    data: {
+      labels: preLabels,
+      datasets: [{
+        label: 'Precision, F1, Recall',
+        data: myDataHaha,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
   const ctx = document.getElementById('category-bar-charts');
    const suggestionCategories = @json($suggestionCategories);
    const myData = @json($mySuggestionPerCategory);

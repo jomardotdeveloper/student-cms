@@ -68,7 +68,7 @@ class GrievanceController extends Controller
 
         $user = auth()->user();
         $data["user_id"] = $user->id;
-        $data["is_student_plm"] = $data["is_student_plm"] == "Yes" ? true : false;
+        // $data["is_student_plm"] = $data["is_student_plm"] == "Yes" ? true : false;
         if (array_key_exists("allowed_users",$data)) {
             $data["allowed_users"] = json_encode($data["allowed_users"]);
         }
@@ -121,12 +121,47 @@ class GrievanceController extends Controller
      */
     public function update(Request $request, Grievance $grievance)
     {
-
-
-
-
-
         $data = $request->all();
+
+        if($request->verify_npl){
+            $selected_policies = $request->policies;
+            $grievance_policies = $grievance->final_say_policies;
+            $grievance->update([
+                "is_fn" => false,
+                "is_tp" => false,
+                "is_fp" => false
+            ]);
+
+            if(count($grievance_policies) < 1){
+                $grievance->update([
+                    "is_fn" => true
+                ]);
+                return redirect()->route('grievances.index');
+            }
+
+            // check if all policies are present in the selected policies
+            $is_present_all = true;
+            foreach($grievance_policies as $grievance_policy){
+                if(!in_array($grievance_policy, $selected_policies)){
+                    $is_present_all = false;
+                }
+            }
+
+            if($is_present_all){
+                $grievance->update([
+                    "is_tp" => true
+                ]);
+                return redirect()->route('grievances.index');
+            }else{
+                $grievance->update([
+                    "is_fp" => true
+                ]);
+                return redirect()->route('grievances.index');
+            }
+
+
+
+        }
 
 
         if (array_key_exists("is_summary_report",$data) && array_key_exists("is_create",$data)) {
@@ -159,7 +194,7 @@ class GrievanceController extends Controller
 
 
         $user = auth()->user();
-        $data["is_student_plm"] = $data["is_student_plm"] == "Yes" ? true : false;
+        // $data["is_student_plm"] = $data["is_student_plm"] == "Yes" ? true : false;
         if (array_key_exists("allowed_users",$data)) {
             $data["allowed_users"] = json_encode($data["allowed_users"]);
         }
@@ -190,12 +225,8 @@ class GrievanceController extends Controller
         return redirect()->route('grievances.index');
     }
 
-    public function printReport() {
-        throw Exception("ncaught TypeError: Cannot read property 'someProperty' of undefined
-        at functionName (script.js:15)
-        at anotherFunction (script.js:8)
-        at window.onload (index.html:10)
-    ");
+    public function printReport(Grievance $grievance) {
+        return view('grievance.print-report', compact('grievance'));
     }
 
 }

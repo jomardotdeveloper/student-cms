@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Contact;
 use App\Models\Role;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -219,6 +220,10 @@ class DatabaseSeeder extends Seeder
             'role_id' => $admin->id,
             'email' => 'admin@superuser.com',
             'user_id' => $user->id,
+        ]);
+
+        Setting::create([
+            'csv_file' => null,
         ]);
     }
 }
