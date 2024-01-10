@@ -177,6 +177,8 @@ class Grievance extends Model
         // combined them to string
         $comments_str = '';
         foreach($comments as $comment) {
+            if($comment['similarity'] <= 0)
+                continue;
             $comments_str .= $comment['policy'] . ' - ' . strval( $comment['similarity']);
             $comments_str .= "<br>";
         }
