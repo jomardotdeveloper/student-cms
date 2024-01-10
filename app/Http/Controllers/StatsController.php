@@ -349,8 +349,12 @@ class StatsController extends Controller
         foreach ($users as $user) {
             $contributionPerUser[$user] = count(Suggestion::where('user_id', $user)->get()->all()) / count($allSuggestion) * 100;
         }
-
-        return $contributionPerUser[auth()->user()->id];
+        if(array_key_exists(auth()->user()->id, $contributionPerUser)) {
+            return $contributionPerUser[auth()->user()->id];
+        } else {
+            return 0;
+        }
+        // return $contributionPerUser[auth()->user()->id];
 
     }
 
