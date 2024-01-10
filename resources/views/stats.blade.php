@@ -160,29 +160,6 @@
         </div>
     </div>
     <div class="col-md-6 text-center">
-        @php
-            // $voteCurrentYear = isset($_GET['voteYear']) ? $_GET['voteYear'] : date('Y');
-            $tpGrievanceCount = \App\Models\Grievance::where('is_tp', true)->count();
-            $fpGrievanceCount = \App\Models\Grievance::where('is_fp', false)->count();
-            $fnGrievanceCount = \App\Models\Grievance::where('is_fn', true)->count();
-            $precision = 0;
-            $recall = 0;
-            $f1 = 0;
-
-            if ($tpGrievanceCount == 0 || $fpGrievanceCount == 0 || $fnGrievanceCount == 0) {
-                $precision = 0;
-                $recall = 0;
-                $f1 = 0;
-            } else {
-                $precision = $tpGrievanceCount / ($tpGrievanceCount + $fpGrievanceCount);
-                $recall = $tpGrievanceCount / ($tpGrievanceCount + $fnGrievanceCount);
-                $f1 = 2 * (( $precision * $recall) / ($precision + $recall));
-            }
-
-
-
-
-        @endphp
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">Precision, f1, and recall</h3>

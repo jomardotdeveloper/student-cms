@@ -54,6 +54,26 @@ class StatsController extends Controller
 
         $topPercentage = $this->topPercentage();
         $totalSuggestionPercentage = $this->totalSuggestionPercentage();
+
+
+        $tpGrievanceCount = \App\Models\Grievance::where('is_tp', true)->count();
+        $fpGrievanceCount = \App\Models\Grievance::where('is_fp', false)->count();
+        $fnGrievanceCount = \App\Models\Grievance::where('is_fn', true)->count();
+        $precision = 0;
+        $recall = 0;
+        $f1 = 0;
+
+        if ($tpGrievanceCount == 0 || $fpGrievanceCount == 0 || $fnGrievanceCount == 0) {
+            $precision = 0;
+            $recall = 0;
+            $f1 = 0;
+        } else {
+            $precision = $tpGrievanceCount / ($tpGrievanceCount + $fpGrievanceCount);
+            $recall = $tpGrievanceCount / ($tpGrievanceCount + $fnGrievanceCount);
+            $f1 = 2 * (( $precision * $recall) / ($precision + $recall));
+        }
+
+
         return view('stats' , compact(
             'totalSuggestionPercentage' ,
             'topPercentage' ,
@@ -70,7 +90,10 @@ class StatsController extends Controller
             'topnames',
             'topcounts',
             'upvotespercentage',
-            'downvotespercentage'
+            'downvotespercentage',
+            'precision',
+            'recall',
+            'f1'
 
         ));
     }
