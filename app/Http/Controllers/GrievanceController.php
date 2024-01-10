@@ -147,6 +147,23 @@ class GrievanceController extends Controller
                 }
             }
 
+            $is_false_negative = false;
+
+            foreach($grievance_policies as $grievance_policy){
+                if(!in_array($grievance_policy, $selected_policies)){
+                    $is_false_negative = true;
+                }else{
+                    $is_false_negative = false;
+                }
+            }
+
+            if($is_false_negative){
+                $grievance->update([
+                    "is_fn" => true
+                ]);
+                return redirect()->route('grievances.index');
+            }
+
             if($is_present_all){
                 $grievance->update([
                     "is_tp" => true
