@@ -199,10 +199,13 @@
 @endsection
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+@if (isset($precision))
 <script>
     const ctxzxczxczx = document.getElementById('f1-bar-charts');
     const preLabels = ["Precision", "F1 Score", "Recall"];
+
+
+
    const myDataHaha = ["{{ $precision }}", "{{ $f1 }}", "{{ $recall }}"];
   new Chart(ctxzxczxczx, {
     type: 'pie',
@@ -222,6 +225,40 @@
       }
     }
   });
+
+</script>
+
+
+@else
+<script>
+    const ctxzxczxczx = document.getElementById('f1-bar-charts');
+    const preLabels = ["Precision", "F1 Score", "Recall"];
+
+
+
+   const myDataHaha = ["0", "0", "0"];
+  new Chart(ctxzxczxczx, {
+    type: 'pie',
+    data: {
+      labels: preLabels,
+      datasets: [{
+        label: 'Precision, F1, Recall',
+        data: myDataHaha,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+</script>
+@endif
+<script>
 
 
   const ctx = document.getElementById('category-bar-charts');
