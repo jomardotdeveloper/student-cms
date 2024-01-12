@@ -34,6 +34,23 @@ class ImportController extends Controller
         $setting->csv_file = $path;
         $setting->save();
 
+        // check csv if it has empty cells
+        $csv = $this->readCSV(public_path($path));
+        $empty_cells = false;
+
+        foreach ($csv as $key => $value) {
+            if ($key != 0) {
+                foreach ($value as $k => $v) {
+                    if ($v == '') {
+                        $empty_cells = true;
+                    }
+                }
+            }
+        }
+
+        if ($empty_cells) {
+            return redirect()->route('imports.index')->with('error', ['CSV file has empty cells']);
+        }
 
 
         return redirect()->route('imports.index')->with('success', 'CSV file uploaded successfully');
