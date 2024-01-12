@@ -120,7 +120,29 @@
                     @endif
                     @if (auth()->user()->contact->role->suggestion_read_write && auth()->user()->contact->role->is_committee && $suggestion->status == 'Pending')
                     <a href="{{ route('suggestions.approve', ['suggestion' => $suggestion]) }}" class="btn btn-primary">Approve</a>
-                    <a href="{{ route('suggestions.reject', ['suggestion' => $suggestion]) }}" class="btn btn-danger">Reject</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $suggestion->id }}">Reject</button>
+
+                        <!-- Reject Modal -->
+                        <div class="modal custom-modal fade" id="rejectModal{{ $suggestion->id }}" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="rejectModalLabel">Reject Suggestion</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('suggestions.reject', ['suggestion' => $suggestion]) }}" method="GET">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-group">
+                                                <label for="rejectReason">Reason for Rejection</label>
+                                                <textarea class="form-control" id="rejectReason" name="reject_reason" required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endif
                 </div>
                 <small class="block text-ellipsis m-b-15">

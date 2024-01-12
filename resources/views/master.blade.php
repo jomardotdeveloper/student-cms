@@ -41,10 +41,10 @@
 
 				<!-- Logo -->
                 <div class="header-left">
-                     <a href="admin-dashboard.html" class="logo">
+                     <a href="#" class="logo">
 						<img src="{{ asset("assets/img/logo.png") }}" width="40" height="40" alt="Logo">
 					</a>
-					<a href="admin-dashboard.html" class="logo2">
+					<a href="#" class="logo2">
 						<img src="{{ asset('assets/img/logo2.png') }}" width="40" height="40" alt="Logo">
 					</a>
                 </div>

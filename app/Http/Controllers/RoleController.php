@@ -106,6 +106,7 @@ class RoleController extends Controller
             'suggestion_read_write',
             'suggestion_read_delete',
             'suggestion_read_create',
+            'is_committee'
         ];
 
         foreach ($boolean_fields as $field) {

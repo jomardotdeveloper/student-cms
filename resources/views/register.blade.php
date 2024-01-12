@@ -77,7 +77,18 @@
 								</div>
                                 <div class="input-block mb-4">
 									<label class="col-form-label">Course<span class="mandatory">*</span></label>
-									<input class="form-control" type="text" name="college" required>
+                                    <select name="college" class="form-control" required>
+                                        <option value="BS ChE">Bachelor of Science in Chemical Engineering - BS ChE</option>
+                                        <option value="BS CE">Bachelor of Science in Civil Engineering - BS CE</option>
+                                        <option value="BS CpE">Bachelor of Science in Computer Engineering - BS CpE</option>
+                                        <option value="BS CS">Bachelor of Science in Computer Science - BS CS</option>
+                                        <option value="BS EE">Bachelor of Science in Electrical Engineering - BS EE</option>
+                                        <option value="BS ECE">Bachelor of Science in Electronics Engineering - BS ECE</option>
+                                        <option value="BS IT">Bachelor of Science in Information Technology - BS IT</option>
+                                        <option value="BS MfE">Bachelor of Science in Manufacturing Engineering - BS MfE</option>
+                                        <option value="BS ME">Bachelor of Science in Mechanical Engineering - BS ME</option>
+                                    </select>
+
 								</div>
                                 <div class="input-block mb-4">
 									<label class="col-form-label">Gender<span class="mandatory">*</span></label>

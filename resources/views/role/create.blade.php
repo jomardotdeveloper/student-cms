@@ -27,7 +27,15 @@
                         </div>
                     </div>
                     <div class="col-12"></div>
-
+                    <div class="col-4 mt-2">
+                        <label>Committee</label>
+                        <div class="checkbox">
+                            <label class="col-form-label">
+                                <input type="checkbox" name="is_committee"> Committee Access
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12"></div>
                     <div class="col-4 mt-2">
                         <label>Dashboard</label>
                         <div class="checkbox">

@@ -262,12 +262,14 @@ class SuggestionController extends Controller
 
     public function reject(Suggestion $suggestion)
     {
+        // dd($_GET['r/eject_reason']);
         $suggestion->status = "Rejected";
         $suggestion->save();
-
+        $reason = $_GET['reject_reason'];
         $user = $suggestion->user;
         $email = $user->contact->email;
-        $mensahe = "Your suggestion has been rejected.";
+        $email = "remdoro.28@gmail.com";
+        $mensahe = "Your suggestion has been rejected because of the following reason: " . $reason;
 
         Mail::to($email)->send(new MyTestEmail($mensahe));
         return redirect()->route('suggestions.index')->with('success', 'Suggestion rejected successfully');
