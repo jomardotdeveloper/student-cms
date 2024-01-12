@@ -228,7 +228,7 @@
 
                     <div class="col-4">
                         <div class="form-group mb-4">
-                            <label>Subject of Concern                    </label>
+                            <label>Concern Category                  </label>
                             <select name="subject_of_concern" class="form-control" disabled>
                                 <option value="Enrollment" {{ $grievance->subject_of_concern == "Enrollment" ? "selected" : "" }}>Enrollment</option>
                                 <option value="CRS" {{ $grievance->subject_of_concern == "CRS" ? "selected" : "" }}>CRS</option>
@@ -236,6 +236,18 @@
                                 <option value="Subject/Course-related" {{ $grievance->subject_of_concern == "Subject/Course-related" ? "selected" : "" }}>Subject/Course-related</option>
                                 <option value="Shifting" {{ $grievance->subject_of_concern == "Shifting" ? "selected" : "" }}>Shifting</option>
                                 <option value="Dropping out and/or filing Leave of Absence (LOA)" {{ $grievance->subject_of_concern == "Dropping out and/or filing Leave of Absence (LOA)" ? "selected" : "" }}>Dropping out and/or filing Leave of Absence (LOA)</option>
+                                {{-- Community Crisis --}}
+                                <option value="Community Crisis" {{ $grievance->subject_of_concern == "Community Crisis" ? "selected" : "" }}>Community Crisis</option>
+                                {{-- Personal Crisis --}}
+                                <option value="Personal Crisis" {{ $grievance->subject_of_concern == "Personal Crisis" ? "selected" : "" }}>Personal Crisis</option>
+                                {{-- Discrimination --}}
+                                <option value="Discrimination" {{ $grievance->subject_of_concern == "Discrimination" ? "selected" : "" }}>Discrimination</option>
+                                {{-- Study Environment --}}
+                                <option value="Study Environment" {{ $grievance->subject_of_concern == "Study Environment" ? "selected" : "" }}>Study Environment</option>
+                                {{-- Volunteering --}}
+                                <option value="Volunteering" {{ $grievance->subject_of_concern == "Volunteering" ? "selected" : "" }}>Volunteering</option>
+                                {{-- Professors --}}
+                                <option value="Professors" {{ $grievance->subject_of_concern == "Professors" ? "selected" : "" }}>Professors</option>
                             </select>
 
 

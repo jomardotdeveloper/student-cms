@@ -197,7 +197,7 @@
 
                     <div class="col-4">
                         <div class="form-group mb-4">
-                            <label>Subject of Concern                    </label>
+                            <label>Concern Category                  </label>
                             <select name="subject_of_concern" class="form-control">
                                 <option value="Enrollment">Enrollment</option>
                                 <option value="CRS">CRS</option>
@@ -205,6 +205,19 @@
                                 <option value="Subject/Course-related">Subject/Course-related</option>
                                 <option value="Shifting">Shifting</option>
                                 <option value="Dropping out and/or filing Leave of Absence (LOA)">Dropping out and/or filing Leave of Absence (LOA)</option>
+
+                                {{-- Community Crisis --}}
+                                <option value="Community Crisis">Community Crisis</option>
+                                    {{-- Personal Crisis --}}
+                                    <option value="Personal Crisis">Personal Crisis</option>
+                                    {{-- Discrimination --}}
+                                    <option value="Discrimination">Discrimination</option>
+                                    {{-- Study Environment --}}
+                                    <option value="Study Environment">Study Environment</option>
+                                    {{-- Volunteering --}}
+                                    <option value="Volunteering">Volunteering</option>
+                                    {{-- Professors --}}
+                                    <option value="Professors">Professors</option>
                             </select>
 
 
