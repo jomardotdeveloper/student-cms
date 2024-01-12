@@ -9,8 +9,29 @@
 <!-- Datatable CSS -->
 @if (!auth()->user()->contact->role->is_committee)
 <div class="row filter-row">
-    <div class="col-3">
-        {{-- <a href="#" class="btn btn-success w-100"> Search </a> --}}
+
+    @php
+        $status = "";
+        $sort = "";
+
+        if(isset($_GET['status'])) {
+            $status = $_GET['status'];
+        }
+
+        if(isset($_GET['sort'])) {
+            $sort = $_GET['sort'];
+        }
+        // dd($status, $sort);
+    @endphp
+    <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3 form-focus select-focus">
+            <select class="select floating" id="status">
+                <option value="Approved" {{ $status == "Approved" ? "selected" : "" }}>Approved</option>
+                <option value="Pending" {{ $status == "Pending" ? "selected" : "" }}>Pending</option>
+                <option value="Rejected" {{ $status == "Rejected" ? "selected" : "" }}>Rejected</option>
+            </select>
+            <label class="focus-label">Status</label>
+        </div>
     </div>
     <div class="col-6">
         <div class="input-block mb-3 form-focus">
@@ -23,9 +44,17 @@
     </div>
     <script>
         function filter() {
+            var status = document.querySelector('#status');
             var search = document.querySelector('#search');
             var url = "{{ route('suggestions.index') }}";
-            if (search) {
+            if (status.value && search.value) {
+                var statusValue = document.querySelector('#status').value;
+                var searchValue = document.querySelector('#search').value;
+                url += "?status=" + statusValue + "&search=" + searchValue;
+            }else if (status.value) {
+                var statusValue = document.querySelector('#status').value;
+                url += "?status=" + statusValue;
+            }else if (search.value) {
                 var searchValue = document.querySelector('#search').value;
                 url += "?search=" + searchValue;
             }

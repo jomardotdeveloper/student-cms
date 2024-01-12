@@ -25,6 +25,10 @@ class SuggestionController extends Controller
             $suggestions = Suggestion::all();
         }
 
+        if(auth()->user()->contact->role->role == "Student") {
+            $suggestions = Suggestion::where("status","Approved")->orWHere("user_id", auth()->user()->id)->get();
+        }
+
         if(isset($_GET['search'])){
             $suggestions = Suggestion::where('body', 'LIKE', '%'.$_GET['search'].'%')->get();
         }
