@@ -56,6 +56,23 @@ class ProfileController extends Controller
 
     public function updatePassword(Request $request)
     {
+        if($request->is_profile){
+            // $validated = $request->validate([
+            //     "name" => "required",
+            //     "email" => "required",
+            //     "phone" => "required",
+            //     "address" => "required",
+            //     "city" => "required",
+            //     "state" => "required",
+            //     "pincode" => "required",
+            // ]);
+
+            $user = auth()->user();
+            $user->contact->update($request->all());
+
+            return back()->with(["success" => ["Profile Updated Successfully"]]);
+
+        }
         $validated = $request->validate([
             "old_password" => "required",
             "password" => "required|confirmed",
@@ -76,7 +93,8 @@ class ProfileController extends Controller
 
     public function editProfile()
     {
-        return view('edit-profile');
+        $student = auth()->user()->contact;
+        return view('edit-profile' , compact('student'));
     }
 
 }
