@@ -182,7 +182,7 @@
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label>Subject of Concern                    </label>
-                            <select name="subject_of_concern" class="form-control">
+                            <select name="subject_of_concern" class="form-control" {{ !auth()->user()->contact->role->is_committee ? "disabled" : "" }}>
                                 <option value="Enrollment" {{ $grievance->subject_of_concern == "Enrollment" ? "selected" : "" }}>Enrollment</option>
                                 <option value="CRS" {{ $grievance->subject_of_concern == "CRS" ? "selected" : "" }}>CRS</option>
                                 <option value="Synchronous and Asynchronous Class" {{ $grievance->subject_of_concern == "Synchronous and Asynchronous Class" ? "selected" : "" }}>Synchronous and Asynchronous Class</option>
@@ -198,7 +198,7 @@
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label>Status                  </label>
-                            <select name="status" class="form-control" required>
+                            <select name="status" class="form-control" required {{ !auth()->user()->contact->role->is_committee ? "disabled" : "" }}>
                                 <option value="Pending" {{ $grievance->status == "Pending" ? "selected" : "" }}>Pending</option>
                                 <option value="Ongoing" {{ $grievance->status == "Ongoing" ? "selected" : "" }}>Ongoing</option>
                                 <option value="Unresponsive" {{ $grievance->status == "Unresponsive" ? "selected" : "" }}>Unresponsive</option>
@@ -210,7 +210,7 @@
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label>Allowed Users                   </label>
-                            <select class="select-multiple form-control" name="allowed_users[]" multiple="multiple">
+                            <select class="select-multiple form-control" name="allowed_users[]" multiple="multiple" {{ !auth()->user()->contact->role->is_committee ? "disabled" : "" }}>
                                 @foreach ($users as $user)
 
                                 <option value="{{ $user->id }}" {{ in_array($user->id, $grievance->allowed_user_ids) ? "selected" : "" }}>{{ $user->contact->full_name }}</option>
