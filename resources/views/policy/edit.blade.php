@@ -62,6 +62,14 @@
                     </div>
 
                 </form>
+                <div class="col-12 mt-2">
+                    <form action="{{ route('policies.destroy', ['policy' => $policy]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <input type="submit" value="Delete" class="btn btn-danger"/>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

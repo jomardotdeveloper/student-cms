@@ -72,8 +72,9 @@ class PolicyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Policy $policy)
     {
-        //
+        $policy->delete();
+        return redirect()->route('policies.index');
     }
 }
