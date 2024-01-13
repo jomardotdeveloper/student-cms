@@ -114,8 +114,10 @@ class Grievance extends Model
         if(count($policies) == 0)
             return "No policies found.";
 
-
+        $count = 1;
         foreach($policies as $policy) {
+            if ($count > 5)
+                break;
             $policyText = $policy->policy;
             // Tokenize the texts
             $tokenizer = new WhitespaceTokenizer();
@@ -129,6 +131,7 @@ class Grievance extends Model
             // Set a threshold for similarity (you can adjust this as needed)
             $threshold = 0;
             if($similarity > 0) {
+                $count++;
                 $comments[] = $policy->id;
             }
             // Check if the similarity meets the threshold
@@ -150,7 +153,10 @@ class Grievance extends Model
             return "No policies found.";
 
 
+        $count = 1;
         foreach($policies as $policy) {
+            if ($count > 5)
+                break;
             $policyText = $policy->policy;
             // Tokenize the texts
             $tokenizer = new WhitespaceTokenizer();
@@ -165,10 +171,14 @@ class Grievance extends Model
             $threshold = 0;
 
             // Check if the similarity meets the threshold
-            $comments[] = [
-                'policy' => $policy->policy,
-                'similarity' => $similarity,
-            ];
+
+            if($similarity > 0) {
+                $count++;
+                $comments[] = [
+                    'policy' => $policy->policy,
+                    'similarity' => $similarity,
+                ];
+            }
         }
 
 
