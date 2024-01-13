@@ -14,7 +14,7 @@
     </div>
     <div class="col-12 mb-1">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verify_npl">
-            Verify NPL
+            Verify NLP
         </button>
     </div>
 
@@ -113,7 +113,7 @@
 
                     <div class="col-4">
                         <div class="form-group mb-4">
-                            <label style="font-weight: bold;">NPL VERIFICATION OUTPUT  </label> <br>
+                            <label style="font-weight: bold;">NLP VERIFICATION OUTPUT  </label> <br>
                             <p>
                                 @if ($grievance->is_tp)
                                     True Positive
