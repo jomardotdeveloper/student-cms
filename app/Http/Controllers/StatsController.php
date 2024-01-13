@@ -70,7 +70,7 @@ class StatsController extends Controller
         } else {
             $precision = $tpGrievanceCount / ($tpGrievanceCount + $fpGrievanceCount);
             $recall = $tpGrievanceCount / ($tpGrievanceCount + $fnGrievanceCount);
-            $f1 = 2 * (( $precision * $recall) / ($precision + $recall));
+            $f1 = (2 * $precision * $recall) / ($precision + $recall);
         }
 
 
