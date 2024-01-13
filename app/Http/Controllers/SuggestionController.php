@@ -272,7 +272,7 @@ class SuggestionController extends Controller
         $reason = $_GET['reject_reason'];
         $user = $suggestion->user;
         $email = $user->contact->email;
-        $email = "remdoro.28@gmail.com";
+        // $email = "remdoro.28@gmail.com";
         $mensahe = "Your suggestion has been rejected because of the following reason: " . $reason;
 
         Mail::to($email)->send(new MyTestEmail($mensahe));
